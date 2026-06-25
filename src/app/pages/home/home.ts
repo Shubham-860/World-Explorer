@@ -9,8 +9,17 @@ import { CountryService } from '../../services/CountryService';
 })
 export class Home implements OnInit {
   constructor(private countries: CountryService) {}
+  country: any;
+
   ngOnInit(): void {
-    this.countries.getCountries();
-    console.log(this.countries.countries());
+    this.countries.getCountry('India').subscribe({
+      next: (country) => {
+        this.country = country;
+        console.log(this.country);
+      },
+      error: (error) => {
+        console.error('Failed to load country', error);
+      },
+    });
   }
 }
