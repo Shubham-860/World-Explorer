@@ -1,0 +1,11 @@
+{
+  "/restcountries-api": {
+    "target": "https://api.restcountries.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/restcountries-api": ""
+    }
+  }
+}

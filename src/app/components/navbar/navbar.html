@@ -1,0 +1,56 @@
+<nav
+  class="relative bg-white after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-slate-200">
+  <input id="mobile-menu-toggle" type="checkbox" class="peer sr-only" aria-controls="mobile-menu">
+
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-between">
+
+      <div class="absolute inset-y-0 right-5 flex items-center sm:hidden">
+        <label
+          for="mobile-menu-toggle"
+          class="relative inline-flex cursor-pointer items-center justify-center rounded-md border border-slate-300 bg-white p-2 text-slate-700 shadow-sm hover:bg-slate-50 hover:text-slate-950 focus:outline-2 focus:-outline-offset-1 focus:outline-sky-500"
+          aria-label="Open main menu"
+        >
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"
+               class="size-6">
+            <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </label>
+      </div>
+
+      <div class="flex w-full justify-between flex-1 items-center sm:items-stretch">
+        <a routerLink="/" class="flex shrink-0 items-center rounded-md px-3 py-2 text-lg font-bold text-slate-950">
+          Home
+        </a>
+
+        <div class="hidden sm:ml-6 sm:block pt-1">
+          <div class="flex space-x-4">
+            <a routerLink="/"
+               class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950">
+              Home
+            </a>
+            <a routerLink="/countries"
+               class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950">
+              Countries
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden peer-checked:block sm:hidden">
+    <div class="space-y-1 px-2 pt-2 pb-3">
+      <a routerLink="/"
+         class="block rounded-md px-3 py-2 text-base font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950">
+        Home
+      </a>
+      <a routerLink="/countries"
+         class="block rounded-md px-3 py-2 text-base font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950">
+        Countries
+      </a>
+    </div>
+  </div>
+</nav>
