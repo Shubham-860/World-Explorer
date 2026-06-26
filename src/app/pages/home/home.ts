@@ -1,26 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { CountryService } from '../../services/CountryService';
+import { Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [RouterLink, FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
   standalone: true,
 })
-export class Home implements OnInit {
-  constructor(private countries: CountryService) {}
-  country: any;
+export class Home {
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    this.countries.getCountry('India').subscribe({
-      next: (country) => {
-        this.country = country;
-        console.log(this.country);
-      },
-      error: (error) => {
-        console.error('Failed to load country', error);
-      },
+  searchQuery = '';
+
+  regions = [
+    { name: 'Africa', slug: 'Africa' },
+    { name: 'Americas', slug: 'Americas' },
+    { name: 'Asia', slug: 'Asia' },
+    { name: 'Europe', slug: 'Europe' },
+    { name: 'Oceania', slug: 'Oceania' },
+    { name: 'Antarctic', slug: 'Antarctic' },
+  ];
+  search(query: string): void {
+    query = query.trim();
+    this.router.navigate(['/countries'], {
+      queryParams: query ? { q: query } : {},
+    });
+  }
+
+  browseRegion(region: string): void {
+    this.router.navigate(['/countries'], {
+      queryParams: { region },
     });
   }
 }

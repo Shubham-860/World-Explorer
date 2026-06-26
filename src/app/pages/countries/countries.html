@@ -1,4 +1,31 @@
 <section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+  <div class="text-center">
+    <h1 class="text-5xl font-semibold text-slate-900">
+      Countries
+    </h1>
+    <p class="mt-2 text-slate-500">
+      Browse and explore countries around the world.
+    </p>
+  </div>
+
+  <!--  searchbar-->
+
+  <div class="mb-8 flex w-full justify-end gap-3">
+    <input
+      #searchInput
+      type="text"
+      placeholder="Search country..."
+      class="w-full md:w-50 rounded-lg border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+      (keyup.enter)="search(searchInput.value)"
+    />
+
+    <button
+      (click)="search(searchInput.value)"
+      class="rounded-lg bg-slate-900 px-5 py-2 text-white">
+      Search
+    </button>
+  </div>
+
   @if (loading()) {
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       @for (_ of skeletonCards; track $index) {
@@ -17,7 +44,7 @@
       @for (country of cs.countries(); track country.uuid) {
         <a [routerLink]="['/country', country.uuid]">
           <article
-            class="overflow-hidden rounded-lg border border-slate-200 h-full bg-white shadow-sm transition hover:-translate-y-0.9 hover:shadow-md"
+            class="group h-full overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg"
           >
             <div class="aspect-video bg-slate-100">
               <img
@@ -28,10 +55,14 @@
               />
             </div>
 
-            <div class="space-y-2 px-5 py-4">
-              <h2 class="text-lg font-semibold text-slate-950">{{ country.names?.common }}</h2>
-              <p class="text-sm leading-6 text-slate-600">
+            <div class="px-5 py-2 text-center">
+              <h2 class="text-xl font-semibold border-b py-2 border-gray-200">{{ country.names?.common }}</h2>
+              <p class="text-sm leading-6 text-slate-900 border-b py-2 border-gray-200">
                 Official name: {{ country.names?.official }}
+              </p>
+
+              <p class="text-sm leading-6 text-slate-900">
+                <span class="font-bold ">Region</span>: {{ country.region }}
               </p>
             </div>
           </article>
@@ -44,5 +75,34 @@
         </p>
       }
     </div>
+
+    @if (!isSearching) {
+      <!--pagination-->
+      <div class="mt-10 flex items-center justify-between max-w-md mx-auto">
+
+        <button
+          (click)="previousPage()"
+          [disabled]="offset === 0"
+          class="rounded-lg border border-slate-300 px-5 py-2 disabled:cursor-not-allowed disabled:opacity-40">
+
+          Previous
+
+        </button>
+
+        <p class="font-medium text-slate-700">
+          Page {{ currentPage }}
+        </p>
+
+        <button
+          (click)="nextPage()"
+          [disabled]="offset>=195"
+          class="rounded-lg border border-slate-300 px-5 py-2 disabled:cursor-not-allowed disabled:opacity-40">
+
+          Next
+
+        </button>
+
+      </div>
+    }
   }
 </section>

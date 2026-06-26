@@ -1,1 +1,156 @@
-<p>home works!</p>
+<div class="min-h-screen bg-white">
+
+  <!-- ── HERO ── -->
+  <section class="border-b border-slate-200 bg-slate-50">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+          195 Countries · 6 Regions
+        </p>
+
+        <h1 class="mt-4 text-5xl font-bold tracking-tight text-slate-900 sm:text-6xl">
+          World Explorer
+        </h1>
+
+        <p class="mt-6 text-lg leading-8 text-slate-600">
+          Discover countries, capitals, flags, regions, languages and more from around the world.
+        </p>
+
+        <!-- Search -->
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <input
+            #heroSearch
+            type="text"
+            placeholder="Search for a country..."
+            class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-slate-900 sm:max-w-md"
+            [(ngModel)]="searchQuery"
+          />
+
+          <button
+            (click)="search(searchQuery)"
+            class="rounded-lg bg-slate-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-slate-800"
+          >
+            Search
+          </button>
+        </div>
+
+        <p class="mt-5 text-sm text-slate-500">
+          or
+          <a
+            routerLink="/countries"
+            class="font-medium text-slate-900 hover:underline"
+          >
+            Browse all countries
+          </a>
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── QUICK STATS ── -->
+  <section class="border-b border-slate-200">
+    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+
+      <div class="grid gap-6 text-center sm:grid-cols-3">
+
+        <div>
+          <p class="text-3xl font-bold text-slate-900">195</p>
+          <p class="mt-1 text-sm text-slate-500">
+            Countries
+          </p>
+        </div>
+
+        <div>
+          <p class="text-3xl font-bold text-slate-900">6</p>
+          <p class="mt-1 text-sm text-slate-500">
+            Regions
+          </p>
+        </div>
+
+        <div>
+          <p class="text-3xl font-bold text-slate-900">193</p>
+          <p class="mt-1 text-sm text-slate-500">
+            UN Members
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── BROWSE BY REGION ── -->
+  <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+
+    <div class="mb-10 text-center">
+      <h2 class="text-3xl font-semibold text-slate-900">
+        Browse by Region
+      </h2>
+
+      <p class="mt-2 text-slate-500">
+        Choose a region to explore its countries.
+      </p>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+      @for (region of regions; track region.slug) {
+        <button
+          (click)="browseRegion(region.slug)"
+          class="rounded-xl border border-slate-200 bg-white p-6 text-left transition hover:border-slate-900 hover:shadow-md"
+        >
+
+          <div class="flex items-center justify-between">
+
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900">
+                {{ region.name }}
+              </h3>
+
+              <p class="mt-1 text-sm text-slate-500">
+                View countries
+              </p>
+            </div>
+
+            <span class="text-xl text-slate-400">
+              →
+            </span>
+
+          </div>
+
+        </button>
+      }
+
+    </div>
+
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="border-t border-slate-200 bg-slate-50">
+
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 text-center sm:flex-row lg:px-8">
+
+      <div>
+        <p class="font-medium text-slate-900">
+          World Explorer
+        </p>
+
+        <p class="text-sm text-slate-500">
+          Built with Angular and REST Countries API.
+        </p>
+      </div>
+
+      <a
+        routerLink="/countries"
+        class="rounded-lg border border-slate-300 px-5 py-2 text-sm transition hover:border-slate-900 hover:text-slate-900"
+      >
+        Browse Countries
+      </a>
+
+    </div>
+
+  </footer>
+
+</div>
