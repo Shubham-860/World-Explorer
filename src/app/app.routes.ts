@@ -17,7 +17,7 @@ export const routes: Routes = [
     component: Countries,
   },
   {
-    path: 'country/:code',
+    path: 'country/:uuid',
     component: CountryDetails,
   },
 ];

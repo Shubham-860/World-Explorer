@@ -1,1 +1,258 @@
-<p>country-details works!</p>
+@if (loading()) {
+  <div class="min-h-screen bg-gray-50 flex items-center justify-center">
+    <p class="text-base text-gray-400">Loading...</p>
+  </div>
+} @else {
+  <div class="min-h-screen  px-6">
+    <div class="max-w-full mx-auto">
+      <div class="overflow-hidden bg-white">
+
+        <!-- ── HERO ── -->
+        <div class="px-10 w-full pt-10 pb-8 flex justify-center gap-8 items-center mx-auto">
+          <img
+            [src]="country().flag.url_png"
+            [alt]="'Flag of ' + country().names.common"
+            class="w-36 h-24 object-cover rounded-lg border-2 border-slate-600 shrink-0"
+          />
+          <div class=" min-w-0">
+            <p class="text-sm text-slate-400 mb-2">
+              {{ country().flag.emoji }}&nbsp;&nbsp;{{ country().region }} · {{ country().subregion }}
+            </p>
+            <h1 class="text-5xl font-medium  leading-none">
+              {{ country().names.common }}
+            </h1>
+            <p class="text-sm text-slate-400 mt-3">
+              {{ country().names.official }}.
+              @if (country().names.alternates) {
+                <br>
+                @for (name of country().names.alternates ; track name) {
+                  {{name}}.
+                }
+              }
+            </p>
+
+          </div>
+        </div>
+
+        <!-- ── STAT BAR ── -->
+        <div class="grid grid-cols-4 divide-x divide-gray-200 border-b border-gray-200 text-center">
+          <div class="px-6 py-4">
+            <p class="text-xs uppercase tracking-widest text-gray-400 mb-1">Population</p>
+            <p class="text-base font-medium text-gray-900">{{ population }}</p>
+          </div>
+          <div class="px-6 py-4">
+            <p class="text-xs uppercase tracking-widest text-gray-400 mb-1">Area</p>
+            <p class="text-base font-medium text-gray-900">{{ areaDisplay }}</p>
+          </div>
+          <div class="px-6 py-4">
+            <p class="text-xs uppercase tracking-widest text-gray-400 mb-1">Capital</p>
+            <p class="text-base font-medium text-gray-900">{{ country().capitals[0]?.name }}</p>
+          </div>
+          <div class="px-6 py-4">
+            <p class="text-xs uppercase tracking-widest text-gray-400 mb-1">Timezone</p>
+            <p class="text-base font-medium text-gray-900">{{ country().timezones[0] }}</p>
+          </div>
+        </div>
+
+        <!-- ── MEMBERSHIPS ── -->
+        <div class="flex flex-wrap items-center gap-2 px-8 py-4 border-b border-gray-200 bg-gray-50">
+          <span class="text-xs uppercase tracking-widest text-gray-400 mr-1">Member of</span>
+          @if (country().memberships.un) {
+            <span
+              class="text-sm font-medium px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200">UN</span>
+          }
+          @if (country().memberships.g20) {
+            <span
+              class="text-sm font-medium px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200">G20</span>
+          }
+          @if (country().memberships.g7) {
+            <span
+              class="text-sm font-medium px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200">G7</span>
+          }
+          @if (country().memberships.brics) {
+            <span class="text-sm font-medium px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200">BRICS</span>
+          }
+          @if (country().memberships.commonwealth) {
+            <span class="text-sm font-medium px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200">Commonwealth</span>
+          }
+          @if (country().memberships.nato) {
+            <span class="text-sm font-medium px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200">NATO</span>
+          }
+          @if (country().memberships.eu) {
+            <span
+              class="text-sm font-medium px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200">EU</span>
+          }
+          @if (country().memberships.asean) {
+            <span class="text-sm font-medium px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200">ASEAN</span>
+          }
+        </div>
+
+        <!-- ── MAIN GRID (all 6 sections inside one grid) ── -->
+        <div class="grid grid-cols-2 divide-x divide-gray-200">
+
+          <!-- Languages -->
+          <div class="p-8 border-b border-gray-200">
+            <p class="text-xs uppercase tracking-widest text-gray-400 mb-4">Languages</p>
+            @for (lang of country().languages; track lang.iso639_1) {
+              <div class="flex justify-between items-center py-2.5 border-b border-gray-100 last:border-0">
+                <span class="text-sm font-medium text-gray-800">{{ lang.name }}</span>
+                <span class="text-sm text-gray-400">{{ lang.native_name }}</span>
+              </div>
+            }
+          </div>
+
+          <!-- Currency & Identifiers -->
+          <div class="p-8 border-b border-gray-200">
+            <p class="text-xs uppercase tracking-widest text-gray-400 mb-4">Currency &amp; identifiers</p>
+            @for (cur of country().currencies; track cur.code) {
+              <div class="flex justify-between items-center py-2.5 border-b border-gray-100">
+                <span class="text-sm text-gray-500">Currency</span>
+                <span class="text-sm font-medium text-gray-800">
+                {{ cur.name }}
+                  <code
+                    class="ml-1.5 text-xs bg-gray-100 border border-gray-200 rounded px-2 py-0.5">{{ cur.symbol }}</code>
+              </span>
+              </div>
+              <div class="flex justify-between items-center py-2.5 border-b border-gray-100">
+                <span class="text-sm text-gray-500">Code</span>
+                <code
+                  class="text-xs bg-gray-100 border border-gray-200 rounded px-2 py-0.5 font-medium">{{ cur.code }}</code>
+              </div>
+            }
+            <div class="flex justify-between items-center py-2.5 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Calling code</span>
+              <code
+                class="text-xs bg-gray-100 border border-gray-200 rounded px-2 py-0.5 font-medium">+{{ country().calling_codes[0] }}</code>
+            </div>
+            <div class="flex justify-between items-center py-2.5">
+              <span class="text-sm text-gray-500">Domain</span>
+              <code
+                class="text-xs bg-gray-100 border border-gray-200 rounded px-2 py-0.5 font-medium">{{ country().tlds[0] }}</code>
+            </div>
+          </div>
+
+          <!-- Geography & Borders -->
+          <div class="p-8 border-b border-gray-200">
+            <p class="text-xs uppercase tracking-widest text-gray-400 mb-4">Geography</p>
+            <div class="flex justify-between items-center py-2.5 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Region</span>
+              <span class="text-sm font-medium text-gray-800">{{ country().subregion }}</span>
+            </div>
+            <div class="flex justify-between items-center py-2.5 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Landlocked</span>
+              <span class="text-sm font-medium text-gray-800">
+              {{ country().landlocked ? 'Yes' : 'No — has coastline' }}
+            </span>
+            </div>
+            <div class="flex justify-between items-center py-2.5 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Drives on</span>
+              <span class="text-sm font-medium text-gray-800 capitalize">{{ country().cars.driving_side }}</span>
+            </div>
+
+            @if (country().borders.length > 0) {
+              <p class="text-xs uppercase tracking-widest text-gray-400 mt-5 mb-3">Borders</p>
+              <div class="flex flex-wrap gap-2">
+                @for (b of country().borders; track b) {
+                  <code
+                    class="text-xs font-medium bg-gray-100 border border-gray-200 rounded px-2.5 py-1">{{ b }}</code>
+                }
+              </div>
+            } @else {
+              <p class="text-xs uppercase tracking-widest text-gray-400 mt-5 mb-1">Borders</p>
+              <p class="text-sm text-gray-400 italic">No land borders</p>
+            }
+          </div>
+
+          <!-- Government & Economy -->
+          <div class="p-8 border-b border-gray-200">
+            <p class="text-xs uppercase tracking-widest text-gray-400 mb-4">Government &amp; economy</p>
+            <div class="flex justify-between items-center py-2.5 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Government</span>
+              <span
+                class="text-sm font-medium text-gray-800 text-right max-w-[55%]">{{ country().government_type }}</span>
+            </div>
+            <div class="flex justify-between items-center py-2.5 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Sovereign</span>
+              <span
+                class="text-sm font-medium text-gray-800">{{ country().classification.sovereign ? 'Yes' : 'No' }}</span>
+            </div>
+            <div class="flex justify-between items-center py-2.5 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Week starts</span>
+              <span class="text-sm font-medium text-gray-800 capitalize">{{ country().date.start_of_week }}</span>
+            </div>
+
+
+          </div>
+          <!-- Links — full width -->
+          <div class="col-span-2 p-8 border-b border-gray-200">
+            <p class="text-xs uppercase tracking-widest text-gray-400 mb-4">Links</p>
+            <div class="grid grid-cols-2 gap-x-10">
+
+              <a [href]="country().links.official" target="_blank"
+                 class="flex items-center gap-3 py-3 border-b border-gray-100 group">
+                <svg class="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path
+                    d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                <span class="text-sm text-blue-500 group-hover:underline flex-1">Official website</span>
+                <svg class="w-3.5 h-3.5 text-gray-300" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
+                </svg>
+              </a>
+
+              <a [href]="country().links.google_maps" target="_blank"
+                 class="flex items-center gap-3 py-3 border-b border-gray-100 group">
+                <svg class="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span class="text-sm text-blue-500 group-hover:underline flex-1">Google Maps</span>
+                <svg class="w-3.5 h-3.5 text-gray-300" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
+                </svg>
+              </a>
+
+              <a [href]="country().links.wikipedia" target="_blank"
+                 class="flex items-center gap-3 py-3 border-b border-gray-100 group">
+                <svg class="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                </svg>
+                <span class="text-sm text-blue-500 group-hover:underline flex-1">Wikipedia</span>
+                <svg class="w-3.5 h-3.5 text-gray-300" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
+                </svg>
+              </a>
+
+              <a [href]="country().links.open_street_maps" target="_blank"
+                 class="flex items-center gap-3 py-3 border-b border-gray-100 group">
+                <svg class="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                  <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
+                  <line x1="9" y1="3" x2="9" y2="18" />
+                  <line x1="15" y1="6" x2="15" y2="21" />
+                </svg>
+                <span class="text-sm text-blue-500 group-hover:underline flex-1">OpenStreetMap</span>
+                <svg class="w-3.5 h-3.5 text-gray-300" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
+                </svg>
+              </a>
+
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+}

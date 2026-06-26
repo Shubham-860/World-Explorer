@@ -6,6 +6,7 @@ import { CountryService } from '../../services/CountryService';
   imports: [],
   templateUrl: './home.html',
   styleUrl: './home.css',
+  standalone: true,
 })
 export class Home implements OnInit {
   constructor(private countries: CountryService) {}

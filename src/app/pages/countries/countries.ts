@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
   templateUrl: './countries.html',
   styleUrl: './countries.css',
+  standalone: true,
 })
 export class Countries implements OnInit {
   constructor(public cs: CountryService) {}

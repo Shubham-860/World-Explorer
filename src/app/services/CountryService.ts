@@ -30,18 +30,16 @@ export class CountryService {
     }
 
     // Real API call, disabled while testing to avoid using the API limit:
-    // this.http.get<any>('/restcountries-api//countries/v5?limit=25&offset=0', {
+    // return this.http.get<any>('/restcountries-api//countries/v5?limit=25&offset=0', {
     //   headers: {
     //     Authorization: 'Bearer rc_live_b27d205ff5fb4ca0bbefac6d63a4286c',
     //   },
     // })
     return this.http.get<unknown>('/mock-data/countries.json').pipe(
       map((response) => {
-        const countries = this.getObjects(response)
+                return this.getObjects(response)
           .map((country) => this.toCountrySummary(country))
           .filter((country): country is CountrySummary => country !== null);
-
-        return countries;
       }),
       tap((countries) => {
         this.countries.set(countries);
@@ -54,10 +52,10 @@ export class CountryService {
     );
   }
 
-  getCountry(country: string) {
+  getCountry(uuid: string) {
     // Real API call, disabled while testing to avoid using the API limit:
     // return this.http
-    //   .get<any>(`/restcountries-api/countries/v5/names.official/${country}`, {
+    //   .get<any>(`/restcountries-api/countries/v5/uuid/${uuid}`, {
     //     headers: {
     //       Authorization: 'Bearer rc_live_b27d205ff5fb4ca0bbefac6d63a4286c',
     //     },
