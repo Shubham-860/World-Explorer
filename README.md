@@ -1,59 +1,114 @@
-# WorldExplorer
+# World Explorer
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.4.
+World Explorer is an Angular web application for browsing and searching country information from around the world.
 
-## Development server
+The app lets users explore countries, view flags, search by country name, filter by region, and open a detailed country profile with geography, population, currency, language, membership, and map links.
 
-To start a local development server, run:
+## Features
 
-```bash
-ng serve
+- Home page with country search and region shortcuts
+- Countries listing page with flag cards
+- Search countries by name
+- Browse countries by region
+- Pagination for the countries list
+- Country details page with:
+  - Flag and official name
+  - Population, area, capital, and timezone
+  - Languages and currencies
+  - Region, subregion, borders, and driving side
+  - Government and membership information
+  - External links such as official website, Google Maps, Wikipedia, and OpenStreetMap
+
+## Tech Stack
+
+- Angular 22
+- TypeScript
+- Tailwind CSS
+- RxJS
+- REST Countries API
+- Vitest for testing
+
+## Project Structure
+
+```text
+src/
+  app/
+    components/
+      navbar/
+      search-bar/
+    pages/
+      home/
+      countries/
+      country-details/
+    services/
+      CountryService.ts
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Getting Started
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Install dependencies:
 
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Start the development server:
 
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+Open the app in your browser:
 
-To build the project run:
+```text
+http://localhost:4200/
+```
+
+## Available Scripts
 
 ```bash
-ng build
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Runs the app locally with Angular dev server.
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Builds the app for production.
 
 ```bash
-ng e2e
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Runs unit tests with Vitest.
 
-## Additional Resources
+```bash
+npm run watch
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Builds the app in watch mode for development.
+
+## App Routes
+
+| Route | Page |
+| --- | --- |
+| `/` | Home page |
+| `/home` | Home page |
+| `/countries` | Countries listing |
+| `/country/:uuid` | Country details |
+
+## API
+
+This project uses the REST Countries API to load country data, flags, regions, languages, currencies, and related details.
+
+## Build
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+The compiled files are generated in the `dist/` directory.
