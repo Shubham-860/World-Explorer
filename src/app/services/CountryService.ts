@@ -19,7 +19,7 @@ export class CountryService {
 
     return (
       this.http
-        .get<any>(`https://api.restcountries.com/restcountries-api/countries/v5?limit=${limit}&offset=${offset}`, {
+        .get<any>(`https://api.restcountries.com/countries/v5?limit=${limit}&offset=${offset}`, {
           headers: {
             Authorization: 'Bearer rc_live_b27d205ff5fb4ca0bbefac6d63a4286c',
           },
@@ -56,7 +56,7 @@ export class CountryService {
   filterByRegion(name: string) {
     return (
       this.http
-        .get<any>(`https://api.restcountries.com/restcountries-api/countries/v5?region=${name}`, {
+        .get<any>(`https://api.restcountries.com/countries/v5?region=${name}`, {
           headers: {
             Authorization: 'Bearer rc_live_b27d205ff5fb4ca0bbefac6d63a4286c',
           },
@@ -72,7 +72,7 @@ export class CountryService {
   searchCountry(name: string) {
     return (
       this.http
-        .get<any>(`https://api.restcountries.com/restcountries-api/countries/v5?q=${name}`, {
+        .get<any>(`https://api.restcountries.com/countries/v5?q=${name}`, {
           headers: {
             Authorization: 'Bearer rc_live_b27d205ff5fb4ca0bbefac6d63a4286c',
           },
@@ -88,7 +88,7 @@ export class CountryService {
   getCountry(uuid: string) {
     return (
       this.http
-        .get<any>(`https://api.restcountries.com/restcountries-api/countries/v5/uuid/${uuid}`, {
+        .get<any>(`https://api.restcountries.com/countries/v5/uuid/${uuid}`, {
           headers: {
             Authorization: 'Bearer rc_live_b27d205ff5fb4ca0bbefac6d63a4286c',
           },
