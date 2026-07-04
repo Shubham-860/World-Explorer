@@ -78,11 +78,7 @@ npm run build
 
 Builds the app for production.
 
-```bash
-npm test
-```
 
-Runs unit tests with Vitest.
 
 ```bash
 npm run watch
@@ -103,12 +99,4 @@ Builds the app in watch mode for development.
 
 This project uses the REST Countries API to load country data, flags, regions, languages, currencies, and related details.
 
-## Build
-
-To create a production build:
-
-```bash
-npm run build
-```
-
-The compiled files are generated in the `dist/` directory.
+API website: [https://restcountries.com/](https://restcountries.com/)
