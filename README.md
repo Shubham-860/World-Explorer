@@ -4,6 +4,18 @@ World Explorer is an Angular web application for browsing and searching country 
 
 The app lets users explore countries, view flags, search by country name, filter by region, and open a detailed country profile with geography, population, currency, language, membership, and map links.
 
+## Screenshots 
+<div style="display: flex; justify-content: space-evenly;">
+  <img width="49%" alt="image" src="https://github.com/user-attachments/assets/fdd48831-78a2-4ef9-9edf-b48e162d64f7" />
+<img width="49%" alt="image" src="https://github.com/user-attachments/assets/d5575608-6856-4219-a6bc-2ffb2d2a43ae" />
+  <img width="2560" height="1380" alt="image" src="https://github.com/user-attachments/assets/4526c06e-2e68-4ffe-a8bd-4b1d57c9c080" />
+
+</div>
+
+## Live Demo
+
+🔗 https://<YOUR_NETLIFY_URL>
+
 ## Features
 
 - Home page with country search and region shortcuts
@@ -78,8 +90,6 @@ npm run build
 
 Builds the app for production.
 
-
-
 ```bash
 npm run watch
 ```
@@ -99,4 +109,4 @@ Builds the app in watch mode for development.
 
 This project uses the REST Countries API to load country data, flags, regions, languages, currencies, and related details.
 
-API website: [https://restcountries.com/](https://restcountries.com/)
+API website: https://restcountries.com/
